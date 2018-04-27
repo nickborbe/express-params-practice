@@ -3,5 +3,10 @@
 <h4> Director: {{this.director}} </h4>
 <h4> Year: {{this.year}} </h4>
 <h4> Rating: {{this.rate}} </h4>
+<form action="/movies/delete/{{this._id}}" method="post">
+  <input type="submit" value="Delete">
+</form>
+<a href="/movies/edit/{{this._id}}"><button>Edit</button></a>
+<br>
 <br>
 {{/each}}

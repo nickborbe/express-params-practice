@@ -1,0 +1,27 @@
+<a href="/movies">Return to full list of movies</a>
+<br>
+<br>
+
+<!-- Simple form which will send a GET request -->
+<form action="/movies/create" method="post">
+  <p>Title</p>
+  <input type="text" name="theTitle">
+
+  <p>Director</p>
+  <input type="text" name="theDirector">
+
+  <p>Year</p>
+  <input type="text" name="theYear">
+
+  <p>Rating</p>
+  <input type="text" name="theRating">
+
+  <p>Duration</p>
+  <input type="text" name="theDuration">
+
+  <p>Genre(s) (use a comma separated list)</p>
+  <input type="text" name="theGenre">
+  <br>
+  <br>
+  <input type="submit" value="Submit Movie">
+</form>
