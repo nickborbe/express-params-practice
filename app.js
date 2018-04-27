@@ -109,7 +109,7 @@ app.post('/movies/create', function (req, res){
    })
    .catch(theError => {console.log(theError)})
 
-   res.redirect('/')
+   res.redirect('/movies/oneMovie/'+newMovie._id)
 })
 
 app.post('/movies/delete/:id', function (req, res){
