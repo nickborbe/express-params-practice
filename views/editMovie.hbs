@@ -1,0 +1,22 @@
+<h1>Edit {{movie.title}}'s information</h1>
+<a href="/movies/new">Add a movie</a>
+
+
+<h3>{{movie.title}}</h3>
+<h3>{{movie.director}}</h3>
+<h3>{{movie.year}}</h3>
+<h3>{{movie.duration}}</h3>
+<h3>{{movie.rate}}</h3>
+{{!-- <h3>{{movie.genre}}</h3> --}}
+
+
+<form action="/movies/update/{{movie._id}}" method="post">
+  <input type="text" name="title" value="{{movie.title}}">
+  <input type="text" name="director" value="{{movie.director}}">
+  <input type="text" name="year" value="{{movie.year}}">
+  <input type="text" name="duration" value="{{movie.duration}}">
+  <input type="text" name="rate" value="{{movie.rate}}">
+  {{!-- <input type="text" name="movieGenre" value="{{movie.genre}}"> --}}
+
+  <input type="submit" value="Submit Changes">
+</form>

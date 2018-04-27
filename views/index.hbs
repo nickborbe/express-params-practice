@@ -1,0 +1,13 @@
+{{#each theList}}
+
+<div>
+  <h3>Movie: <a href="/movies/{{this._id}}"> {{this.title}}  </a></h3>
+  <p>Director: {{this.director}}</p>
+  {{!-- <h6>{{this.year}}</h6> --}}
+  <form action="/movies/delete/{{this._id}}" method="post">
+    <input type="submit" value="Delete">
+  </form>
+  <a href="/movies/edit/{{this.id}}"> Edit </a>
+</div>
+
+{{/each}}
