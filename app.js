@@ -25,24 +25,57 @@ const movieSchema = new Schema({
 
 const Movie = mongoose.model('Movie', movieSchema);
 
-app.get('/', function (req, res) {
-	Movie.find({}, function(err, movie) {
-		res.render('index', {movie});
+app.get('/movies', function (req, res) {
+	Movie.find()
+	.then(movies => { 
+		let data = {};
+		data.theList = movies;
+		res.render('index', data);
+	})
+	.catch (theError => {
+		console.log(theError); 
 	});
 });
 
-app.get('/movies/:director', function (req, res) {
-  let theUserName = req.params.username;
-  // let theUser = User.find({username: theUserName})   this is how we will query the database
-  let data = {theActualUserName: theUserName }
-  res.render('userpage', data)
-})
+app.get('/movies/:theidthing', function (req, res) {
+	const theId = req.params.theidthing;
+	Movie.findById(theId)
+	.then(movie => { 
+		let data = {};
+		data.theList = movie;
+		res.render('movieshow', data);
+	})
+	.catch (theError => {
+		console.log(theError); 
+	});
+});
 
-app.get('/movies/:year', function (req, res) {
-  let theUserName = req.params.username;
-  // let theUser = User.find({username: theUserName})   this is how we will query the database
-  let data = {theActualUserName: theUserName }
-  res.render('userpage', data)
-})
+app.get('/movies/director/:director', function (req, res) {
+	const theDirector = req.params.director;
+	Movie.find({director: theDirector})
+	.then(movies => {
+		let data = {};
+		  data.theList = movies;
+		  data.directorName = theDirector;
+	  	res.render('moviesbydirector', data);
+	})
+	.catch (theError => {
+		console.log(theError); 
+	});
+});
+
+app.get('/movies/year/:year', function (req, res) {
+	const theDirector = req.params.year;
+	Movie.find({year: theYear})
+	.then(movies => {
+		let data = {};
+		data.yearList = movies;
+		data.yearValue = theDirector;
+	  	res.render('moviesbyyear', data);
+	})
+	.catch (theError => {
+		console.log(theError); 
+	});
+});
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
