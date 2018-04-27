@@ -1,7 +1,3 @@
-// 2. Add a route that shows a form that the user can use to create a new movie 
-
-// 3.  Make a post route so submit the information, and make a all to the database to create a new movie
-// (don't forget to redirect back to the index page)
 
 // 4.  Make a button to delete a movie.  This button should be on the index page, each movie in the list should have a button next to them 
 
