@@ -1,0 +1,14 @@
+<h3>do you want to add a new movie?</h3>
+    <a  href="/movies/new"> <button> Click Here </button> </a>
+
+
+<h1>List Of Movies</h1>
+
+<ul>
+    {{#each theList}}
+        <li>
+        <a href="/movies/display/{{this._id}}"><h2>{{this.title}}</h2></a>
+        <h3>{{this.director}}</h3>
+        </li>
+    {{/each}}
+</ul>
