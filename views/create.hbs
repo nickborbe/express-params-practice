@@ -1,1 +1,26 @@
-lol
+<form action="/createMovie" method="POST">
+	Title:<br>
+	<input type="text" name="title" value="Title">
+	<br>
+	Director:<br>
+	<input type="text" name="director" value="Director">
+	<br>
+	Year:<br>
+	<input type="text" name="year" value="Year">
+	<br>
+	Rating:<br>
+	<input type="text" name="rate" value="Rating">
+	<br>
+	<br><br>
+	<input type="submit" value="Create">
+</form> 
+
+{{!-- 
+const movieSchema = new Schema({
+	title : String,
+  	year  : String,
+  	director: String,
+  	duration: String,
+  	genre: [],
+  	rate : String
+}); --}}

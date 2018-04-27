@@ -33,6 +33,24 @@ app.get('/', function(req, res) {
 
 app.get('/create', function(req, res) {
 	res.render('create');
+	
+})
+
+app.post('/createMovie', function(req, res) {
+	let newMovie = {
+		title:  req.body.title,
+		year: req.body.year,
+		director: req.body.director,
+		duration: req.body.duration,
+		rate: req.body.rate
+	}
+	Movie.create(newMovie)
+		.then(movie => {
+			res.redirect('/');
+	})
+	.catch(error => {
+		console.log(error)
+	})
 })
 
 app.get('/movies', function (req, res) {
