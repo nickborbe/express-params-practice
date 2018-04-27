@@ -4,6 +4,11 @@
 <h4> Year: {{this.year}} </h4>
 <h4> Rating: {{this.rate}} </h4>
 <h4> Duration: {{this.duration}}</h4>
-<h4> Genre: {{this.genre}}</h4>
+<h4> Genre(s):</h4>
+{{#each this.genre}}
+<ul>
+  <li>{{this}}</li>
+</ul>
+{{/each}}
 <br>
 {{/each}}

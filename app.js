@@ -22,40 +22,44 @@ app.set('view engine', 'hbs');
 
 const movieSchema = new Schema({
   title    : String,
-  year     : Number,
+  year     : String,
   director : String,
   duration : String,
   genre    : [String],
-  rate     : Number
+  rate     : String
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
 
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/movies', (req, res) => {
   Movie.find({}, function(err, movie) {
-    console.log(' Movie: ', movie.title, movie.director, movie.year, movie.rating);
     res.render('index', {movie})
   });
 });
 
-app.get('/movies/:director', function (req, res) {
+app.get('/movies/:id', (req, res) => {
+  const theId = req.params.id;
+  Movie.findById(theId, function(err, movie) {
+    res.render('movieshow', {movie})
+  });
+});
+
+app.get('/movies/director/:director', function (req, res) {
   let theDirector = req.params.director;
-  let data = {theDirectorsName: theDirector }
-  Movie.find({director: theDirector}, function(err, movie) {
-    res.render('moviepage', {movie})
+  Movie.find( {director: theDirector}, function(err, movie) {
+    res.render('directorpage', {movie})
   });
 })
 
-app.get('/movies/:year', function (req, res) {
-  let theYear = req.params.year;
-  let data = {theMovieYear: theYear }
-  Movie.find({year: theYear}, function(err, movie) {
-    res.render('moviepage', {movie})
+app.get('/movies/year/:year', function (req, res) {
+  let theYear = req.params.year;  
+  Movie.find( {year: theYear}, function(err, movie) {
+    console.log("blah: ", movie)
+    res.render('yearpage', {movie})
   });
 })
 
 
-
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log('Practice app listening on port 3000!'))
