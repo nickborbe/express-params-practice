@@ -1,12 +1,12 @@
-<h1>{{theMovie.title}}</h1>
-<h2>{{theMovie.director}}</h2>
-<h3>{{theMovie.year}}</h3>
-<h3>{{theMovie.duration}}</h3>
-<h4>{{theMovie.rate}}</h4>
+<h1>Title: {{movie.title}}</h1>
+<h2>Direction: {{movie.director}}</h2>
+<h3>Year: {{movie.year}}</h3>
+<h3>Duration: {{movie.duration}}</h3>
+<h4>Rating: {{movie.rate}}</h4>
 
 <h6>Genres:</h6>
-{{#each theMovie.genre}}
+{{#each movie.genre}}
 
-	<p> {{this}} </p>
+	<p>{{genre}}</p>
 
 {{/each}}

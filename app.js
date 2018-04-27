@@ -3,6 +3,7 @@ const app     = express()
 const hbs     = require('hbs')
 const path = require('path');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/video').then(() => {
 	console.log('Connected to Mongo!')
@@ -12,6 +13,7 @@ mongoose.connect('mongodb://localhost/video').then(() => {
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.use(bodyParser.urlencoded({ extended: true}));
 
 const Schema   = mongoose.Schema;
 const movieSchema = new Schema({
@@ -25,6 +27,14 @@ const movieSchema = new Schema({
 
 const Movie = mongoose.model('Movie', movieSchema);
 
+app.get('/', function(req, res) {
+	res.redirect('/movies');
+})
+
+app.get('/create', function(req, res) {
+	res.render('create');
+})
+
 app.get('/movies', function (req, res) {
 	Movie.find()
 	.then(movies => { 
@@ -37,13 +47,14 @@ app.get('/movies', function (req, res) {
 	});
 });
 
-app.get('/movies/:theidthing', function (req, res) {
-	const theId = req.params.theidthing;
-	Movie.findById(theId)
+app.get('/movies/:_id', function (req, res) {
+	// const theId = req.params.theidthing;
+	console.log(req.params);
+	Movie.findById(req.params)
 	.then(movie => { 
 		let data = {};
 		data.theList = movie;
-		res.render('movieshow', data);
+		res.render('movieshow', {movie});
 	})
 	.catch (theError => {
 		console.log(theError); 
