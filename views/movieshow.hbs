@@ -1,0 +1,15 @@
+<a href="/movies">Return to full list of movies</a>
+<br>
+<br>
+
+<h2> {{movie.title}} </h2>
+<h4> Director: {{movie.director}} </h4>
+<h4> Year: {{movie.year}} </h4>
+<h4> Rating: {{movie.rate}} </h4>
+<h4> Duration: {{movie.duration}}</h4>
+<h4> Genre(s):</h4>
+{{#each movie.genre}}
+<ul>
+  <li>{{this}}</li>
+</ul>
+{{/each}}
