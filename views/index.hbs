@@ -1,13 +1,13 @@
-<div class ="the movie">
+<div class= "the movie">
 
-<ul class = 'movie-title'>
-  {{#each movie}}
-  <li><b>Title: {{title}}</b> <br> 
-  <i>Director: {{director}} </i><br> 
-  Year: {{year}} <br> 
-  Rate: {{Rate}}</li>
-  {{/each}}
-</ul>
+  <ul class= 'movie-title'>
+    {{#each theList}}
+      <a href="/movies/{{this._id}}"><h2><li><b>Title: {{title}}</b><br></h2></a>
+      <i>Director: {{director}}</i><br> 
+      Year: {{year}} <br> 
+      Rate: {{rate}}</li>
+    {{/each}}
+  </ul>
     
 </div>
 
