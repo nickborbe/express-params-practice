@@ -1,0 +1,13 @@
+<h1>{{theMovie.title}}</h1>
+<h1>{{theMovie.director}}</h1>
+<h1>{{theMovie.year}}</h1>
+<h1>{{theMovie.duration}}</h1>
+<h1>{{theMovie.rate}}</h1>
+
+<h6>Genres:</h6>
+
+<ul>
+{{#each theMovie.genre}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
