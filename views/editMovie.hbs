@@ -1,0 +1,14 @@
+<h1>Edit Movie</h1>
+
+<h2>{{theList.title}}</h2>
+<h3>{{theList.director}}</h3>
+<h4>{{theList.year}}</h4>
+<h5>{{theList.rate}}</h5>
+
+<form action = "/movies/update/{{theList._id}}" method ="post">
+    <input type="text" name="title" placeholder="{{theList.title}}">
+    <input type="text" name="director" placeholder="{{theList.director}}">
+    <input type="text" name="year" placeholder="{{theList.year}}">
+    <input type="text" name="rate" placeholder="{{theList.rate}}">
+    <input type="submit" name="" value="Submit Changes">
+</form>
