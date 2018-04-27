@@ -1,0 +1,25 @@
+<h1>Edit Movie</h1>
+
+<h2>{{movie.title}}</h2>
+
+<h4>{{movie.director}}</h4>
+
+<h3>{{movie.year}}</h3>
+
+
+<h5>{{movie.duration}}</h5>
+
+<h7>{{movie.rate}}</h7>
+
+<h6>{{movie.genre}}</h6>
+
+<form action="/movies/update/{{movie._id}}" method="post">
+  <input type="text" name="title" value="{{movie.title}}">
+  <input type="text" name="year" value="{{movie.year}}">
+  <input type="text" name="director" value="{{movie.director}}">
+  <input type="text" name="duration" value="{{movie.duration}}">
+  <input type="text" name="genre" value="{{movie.genre}}">
+  <input type="text" name="rate" value="{{movie.rate}}">
+
+  <input type="submit" value="Submit Changes">
+</form>
