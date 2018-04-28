@@ -1,31 +1,141 @@
-// app.js
-const express = require('express')
-const app     = express()
-const hbs     = require('hbs')
+const express = require('express');
+const app = express();
+const hbs = require('hbs');
 const path = require('path');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+// const movies = require('./movies.json');
+mongoose.connect('mongodb://localhost/movies');
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+const Schema = mongoose.Schema;
 
-app.get('/', function (req, res) {
-  console.log(req)
-})
+const movieSchema = new Schema({
+  title: String,
+  year: String,
+  director: String,
+  duration: String,
+  genre: [],
+  rate: String,
+});
 
-app.get('/users/:username', function (req, res) {
-  let theUserName = req.params.username;
-  // let theUser = User.find({username: theUserName})   this is how we will query the database
-  let data = {theActualUserName: theUserName }
-  res.render('userpage', data)
-})
+const Movie = mongoose.model('Movie', movieSchema);
 
+app.set('views', path.join(__dirname, '/views')); //?????????????????????
+app.set('view engine', 'hbs'); //??????????????????????????????
 
-app.get('/search', function (req, res) {
-  res.send(req.query)
-})
+// app.use(express.static(path.join(__dirname, 'public'))); //????
+// hbs.registerPartials(__dirname + '/views/partials'); //????????
 
+app.use(bodyParser.urlencoded({ extended: true }));
 
+// ========= routes ==================
+app.get('/', function(req, res) {
+  Movie.find()
+    .then(movie => {
+      let data = {};
+      data.list = movie;
+      res.render('index', data);
+    })
+    .catch(theError => {
+      console.log(theError);
+    });
+});
 
+app.get('/details/:_id', function(req, res) {
+  Movie.findById(req.params).then(movie => {
+    let data = { list: movie };
+    res.render('details', data);
+  });
+});
 
+app.get('/movies/director/:director', function(req, res) {
+  console.log(req.params);
+  Movie.find(req.params).then(movie => {
+    console.log(movie.length);
+    // let data = {
+    //   theActualDirector: movie,
+    // };
+    res.render('directors', { movie });
+    // let filterDirector = movies.filter(data.theActualDirector);
+  });
+});
 
+app.get('/movies/year/:year', function(req, res) {
+  console.log(req.params);
+  Movie.find(req.params).then(movie => {
+    console.log(movie.length);
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+    res.render('years', { movie });
+  });
+});
+
+app.get('/movies/new', function(req, res) {
+  res.render('newMovies');
+});
+
+app.post('/movies/create', function(req, res) {
+  console.log('req body', req.body);
+
+  const theActualTitle = req.body.theTitle;
+  const theActualYear = req.body.theYear;
+  const theActualDirector = req.body.theDirector;
+  const theActualDuration = req.body.theDuration;
+  const theActualRate = req.body.theRate;
+
+  const newMovie = new Movie({
+    title: theActualTitle,
+    year: theActualYear,
+    director: theActualDirector,
+    duration: theActualDuration,
+    rate: theActualRate,
+  });
+
+  newMovie
+    .save()
+    .then(Movie => {})
+    .catch(theError => {
+      console.log(theError);
+    });
+
+  res.redirect('/');
+});
+
+// const movieId = req.params.id;
+// console.log(movieId);
+
+app.post('/movies/delete/:id', function(req, res) {
+  // const movieId = req.params.id;
+  // console.log(movieId);
+  Movie.findByIdAndRemove(req.params.id)
+    .then(movie => {
+      // console.log(movie);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  res.redirect('/');
+});
+
+app.get('/movies/edit/:id', function(req, res) {
+  Movie.findById(req.params.id).then(theMovie => {
+    res.render('editMovie', { movie: theMovie });
+  });
+});
+
+app.post('/movies/update/:id', function(req, res) {
+  const theId = req.params.id;
+  Movie.findByIdAndUpdate(theId, {
+    title: req.body.title,
+    year: req.body.year,
+    director: req.body.director,
+    duration: req.body.duration,
+    rate: req.body.rate,
+  })
+    .then(movie => {})
+    .catch(theError => {
+      console.log(theError);
+    });
+  res.redirect('/details/' + theId);
+});
+
+app.listen(3000, () => console.log('Connected to server!'));
