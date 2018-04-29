@@ -38,11 +38,11 @@ app.get('/create', function(req, res) {
 
 app.post('/createMovie', function(req, res) {
 	let newMovie = {
-		title:  req.body.title,
-		year: req.body.year,
-		director: req.body.director,
-		duration: req.body.duration,
-		rate: req.body.rate
+		title: 		req.body.title,
+		year: 		req.body.year,
+		director: 	req.body.director,
+		duration: 	req.body.duration,
+		rate: 		req.body.rate
 	}
 	Movie.create(newMovie)
 		.then(movie => {
