@@ -22,6 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 
+
 const movieSchema = new mongoose.Schema({
   title : String,
   year  : String,
@@ -65,7 +66,7 @@ rate: theActualRate
 console.log("about to save new movie!!")
 newMovie.save()
 .then(movie => {
-console.log("Saved ne moveie!")
+console.log("Saved  moveie!")
 console.log(movie)
 })
 .catch(theError => { 
@@ -81,6 +82,7 @@ app.get('/movies/edit/:id', function (req, res) {
   .then(theMovie =>{
     res.render('editMovie', {movie: theMovie})
   })
+  res.redirect('/movies')
 });
 
 app.post('/movies/update/:id', function (req, res) {
@@ -94,7 +96,6 @@ Movie.findByIdAndUpdate(req.params.id, {
   console.log(movie);
 })
 .catch(theError => { console.log(theError) })
-
 res.redirect('/movies')
 });
 

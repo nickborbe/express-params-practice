@@ -1,13 +1,16 @@
 <div class= "the movie">
 
-  <ul class= 'movie-title'>
-    {{#each theList}}
-      <a href="/movies/{{this._id}}"><h2><li><b>Title: {{title}}</b><br></h2></a>
-      <i>Director: {{director}}</i><br> 
-      Year: {{year}} <br> 
-      Rate: {{rate}}</li>
-    {{/each}}
-  </ul>
+    <ul class= 'movie-title'>
+         {{#each theList}}
+              <a href="/movies/{{movie._id}}"><h2><li><b>Title: {{title}}</b><br></h2></a>
+                  <form  action="/movies/delete/{{movie._id}}" method="post">
+                    <i>Director: {{director}}</i><br> Year: {{year}} <br> Rate: {{rate}}
+                    </form>
+                    </li>
+                    <button type="submit"> Delete </button>
+                   <a href="/movies/edit/{{movie._id}}">Make Changes</a>
+          {{/each}}
+    </ul>
     
 </div>
 
